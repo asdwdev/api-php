@@ -1,7 +1,10 @@
 <?php
 require __DIR__ . "/../helpers/response.php";
 require __DIR__ . "/../helpers/validate.php";
+require __DIR__ . "/../helpers/auth.php";
 require __DIR__ . "/../config.php";
+
+require_api_key();
 
 $method = $_SERVER['REQUEST_METHOD'];
 
