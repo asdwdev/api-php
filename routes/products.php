@@ -1,10 +1,11 @@
 <?php
-require __DIR__ . "/../helpers/response.php";
 require __DIR__ . "/../helpers/validate.php";
 require __DIR__ . "/../helpers/auth.php";
-require __DIR__ . "/../config.php";
+require __DIR__ . "/../helpers/jwt.php";
+require __DIR__ . "/../config/database.php";
 
-require_api_key();
+// require_api_key();
+$user = require_jwt();
 
 $method = $_SERVER['REQUEST_METHOD'];
 

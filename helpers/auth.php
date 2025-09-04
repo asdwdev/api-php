@@ -1,5 +1,5 @@
 <?php
-require __DIR__ . "/../config.php";
+require __DIR__ . "/../config/security.php";
 // require __DIR__ . "/response.php";
 
 function require_api_key()

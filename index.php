@@ -11,6 +11,10 @@ switch ($path) {
         require __DIR__ . "/routes/products.php";
         break;
 
+    case 'login':
+        require __DIR__ . "/routes/login.php";
+        break;
+
     case 'test-validate':
         require __DIR__ . "/routes/test-validate.php";
         break;

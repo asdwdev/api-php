@@ -1,0 +1,2 @@
+<?php
+$JWT_SECRET = "SUPERSECRET123";
