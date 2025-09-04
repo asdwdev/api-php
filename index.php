@@ -1,5 +1,6 @@
 <?php
-$path = $_GET['path'] ?? '';
+$path   = $_GET['path'] ?? '';
+$method = $_SERVER['REQUEST_METHOD'];
 
 switch ($path) {
     case 'ping':
