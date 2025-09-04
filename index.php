@@ -11,6 +11,10 @@ switch ($path) {
         require __DIR__ . "/routes/products.php";
         break;
 
+    case 'test-validate':
+        require __DIR__ . "/routes/test-validate.php";
+        break;
+
     default:
         require __DIR__ . "/helpers/response.php";
         json_response([
