@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Kalau file/folder beneran ada → jangan diubah
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Semua request lempar ke index.php, bawa path setelah /
+RewriteRule ^(.*)$ index.php?path=$1 [QSA,L]
