@@ -1,5 +1,6 @@
 <?php
 require __DIR__ . "/../helpers/response.php";
+require __DIR__ . "/../helpers/validate.php";
 require __DIR__ . "/../config.php";
 
 $method = $_SERVER['REQUEST_METHOD'];
@@ -24,11 +25,17 @@ switch ($method) {
         }
         break;
 
-    case 'POST':
+    case "POST":
         $input = json_decode(file_get_contents("php://input"), true);
-        if (!isset($input['name']) || !isset($input['price'])) {
-            json_response(["status" => "error", "message" => "Invalid input"], 400);
+
+        $errors = validate_product_input($input);
+        if (!empty($errors)) {
+            json_response([
+                "status" => "error",
+                "errors" => $errors
+            ], 400);
         }
+
         $name  = $conn->real_escape_string($input['name']);
         $price = intval($input['price']);
         $conn->query("INSERT INTO products (name, price) VALUES ('$name', $price)");
@@ -42,10 +49,16 @@ switch ($method) {
         if ($check->num_rows === 0) {
             json_response(["status" => "error", "message" => "Product not found"], 404);
         }
+
         $input = json_decode(file_get_contents("php://input"), true);
-        if (!isset($input['name']) || !isset($input['price'])) {
-            json_response(["status" => "error", "message" => "Invalid input"], 400);
+        $errors = validate_product_input($input);
+        if (!empty($errors)) {
+            json_response([
+                "status" => "error",
+                "errors" => $errors
+            ], 400);
         }
+
         $name  = $conn->real_escape_string($input['name']);
         $price = intval($input['price']);
         $conn->query("UPDATE products SET name='$name', price=$price WHERE id=$id");
